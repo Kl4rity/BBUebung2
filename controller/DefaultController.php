@@ -2,18 +2,18 @@
 
 class DefaultController{
     
-    private $response;
+    private $responseData;
     
     public function construct_(){
         createDefaultResponse();
     }
     
     public function handle($JSONView){
-        $JSONView.streamOutput($this->response);
+        $JSONView.streamOutput($this->responseData);
     }
     
     private function createDefaultResponse(){
-        $this->response = array(
+        $this->responseData = array(
             'response' => 'No request provided.'
         );
     }

@@ -1,6 +1,10 @@
 <?php
 
 class OddController{
+    
+    private $data;
+    private $responseData;
+    
     public function construct_(){
         $this->responseData = array();
         $this->data = array();

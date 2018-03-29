@@ -38,10 +38,6 @@ class Router{
             default:
                 $this->defaultController.handle($this->JSONView);
         }
-        
-        // switch-case matching the requested page to the controller
-        // remember to keep logic for routing in the controllers (not here.)
-        
     }
     
     private function initializeControllers(){
