@@ -2,21 +2,20 @@
 
 class FlipController{
     
-    private $data;
-    private $responseData;
-    
-    public function construct_(){
-        $this->responseData = array();
-        $this->data = array();
+    public function __construct(){
+
     }
     
-    public function manipulate($_data, $JSONView){
-        $this->data = $_data;
+    public function handle($_data, $JSONView){
+        $responseData = array();
         
-        foreach($this->data as $entry){
-            array_unshift($this->responseData, $entry);
+        foreach($_data as $entry){
+            array_unshift($responseData, $entry);
         }
-        $JSONView.streamOutput($responseData);
+        
+        $response = $JSONView->buildResponse('flip', $responseData);
+        
+        $JSONView->streamOutput($response);
     }
 }
 

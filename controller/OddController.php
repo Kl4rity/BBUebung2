@@ -2,30 +2,21 @@
 
 class OddController{
     
-    private $data;
-    private $responseData;
-    
-    public function construct_(){
-        $this->responseData = array();
-        $this->data = array();
+    public function __construct(){
+
     }
     
     public function handle($_data, $JSONView){
-        $this->data = $_data;
+        $responseData = array();
         
-        for($i = 0; $i < count($this->data); $i++){
-            
-           // Append 0th element
-           if($i == 0){
-            array_push($this->responseData, $this->data[$i]);   
-           }
-           // Append every second element
-            if($i%2 == 0){
-                array_push($this->responseData, $this->data[$i]); 
-            }
+            for($i = 0; $i < count($_data); $i++){
+               // Append every second element
+                if($i%2 == 0){
+                    array_push($responseData, $_data[$i]); 
+                }
         }
-        $JSONView.streamOutput($responseData);
+        $response = $JSONView->buildResponse('odd', $responseData);
+        $JSONView->streamOutput($response);
     }
-    
 }
 

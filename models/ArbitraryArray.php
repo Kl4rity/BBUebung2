@@ -3,11 +3,11 @@
 class ArbitraryArray{
     private $arbitraryArray;
     
-    public function construct_(){
+    public function __construct(){
         //Initialize Array
         $this->arbitraryArray = array();
         //loads data into Array.
-        loadDataFromJson();
+        $this->loadDataFromJson();
     }
     
     private function loadDataFromJson(){
@@ -17,7 +17,7 @@ class ArbitraryArray{
     }
     
     public function getArbitraryArray(){
-        return $this->arbitraryArray;
+        return $this->arbitraryArray->data;
     }
 }
 

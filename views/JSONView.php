@@ -1,6 +1,6 @@
 <?php
 
-class JsonView {
+class JSONView {
     
     public function __construct(){
         header('Content-Type: application/json');
@@ -10,6 +10,15 @@ class JsonView {
         // Accepts a dictionary
         $jsonOutput = json_encode($data);
         echo $jsonOutput;
+    }
+    
+    public function buildResponse($simulation, $responseData){
+        $response = array(
+            'simulation' => $simulation
+            , 'result' => $responseData
+        );
+        
+        return $response;
     }
 }
 

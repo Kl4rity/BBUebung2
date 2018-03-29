@@ -9,48 +9,65 @@ class Router{
     private $defaultController;
     private $dataHandler;
     
-    public function construct_(){
+    public function __construct(){
         // Initialize Controllers
-        initializeControllers();
+        $this->initializeControllers();
         // Initialize ArbitraryArray;
-        getData();
-        // Ready to rock -> Route.
-        route();
+        $this->getData();
     }
     
     private function getData(){
-        $this->data = $this->dataHandler.getArbitraryArray();
+        $this->data = $this->dataHandler->getArbitraryArray();
     }
     
-    public function route(){
-        // get Parameters
-        
-        //TODO: Figure out how to get the URI and separate the params from it
-        $requestedURI = $_SERVER[REQUEST_URI];
+    private function initializeControllers(){
+        $this->JSONView = new JSONView();
+        $this->flipController = new FlipController();
+        $this->oddController = new OddController();
+        $this->untilController = new UntilController();
+        $this->dataHandler = new ArbitraryArray();
+        $this->defaultController = new DefaultController();
+    }
+    
+    public function route(){        
         $until_parameter;
+        $simulation_paramter;
         
         if(isset($_GET['until'])){
             $until_parameter = $_GET['until'];
         }
-        
-        switch($requestedURI){
-            case '/flip':
-                $this->flipController.handle($this->data, $this->JSONView);
-            case '/odd':
-                $this->oddController.handle($this->data, $this->JSONView);
-            case 'until':
-                $this->untilController.handle($this->data, $until_parameter, $this->JSONView);
-            default:
-                $this->defaultController.handle($this->JSONView);
+        if(isset($_GET['simulation'])){
+            $simulation_parameter = $_GET['simulation'];
         }
-    }
-    
-    private function initializeControllers(){
-        $this->flipController = new FlipController;
-        $this->oddController = new OddController;
-        $this->untilController = new UntilController;
-        $this->dataHandler = new ArbitraryArray();
-        $this->defaultController = new DefaultController();
+        
+        if($simulation_parameter == 'flip'){
+            $this->flipController->handle($this->data, $this->JSONView);
+        } elseif ($simulation_parameter == 'odd') {
+            $this->oddController->handle($this->data, $this->JSONView);
+        } elseif ($simulation_parameter == 'until') {
+            $this->untilController->handle($this->data, $until_parameter, $this->JSONView);
+        } else {
+            $this->defaultController->handle($this->JSONView);
+
+        }
+        
+        /*
+        switch($simulation_parameter){
+            case 'flip':
+                $this->flipController->handle($this->data, $this->JSONView);
+                break;
+            case 'odd':
+                $this->oddController->handle($this->data, $this->JSONView);
+                break;
+            case 'until':
+                $this->untilController->handle($this->data, $until_parameter, $this->JSONView);
+                break;
+            default:
+                $this->defaultController->handle($this->JSONView);
+        }
+        
+         * 
+         */ 
     }
 }
 

@@ -2,24 +2,26 @@
 
 class UntilController{
     
-    private $data;
-    private $responseData;
-    
-    public function construct_(){
-        $this->responseData = array();
-        $this->data = array();
+    public function __construct(){
+        
     }
     
-    public function handle($_data, $_target, $JSONView){
-        $this->data = $_data;
+    public function handle($_data, $_until, $JSONView){
+        $responseData = array();
+        $until = strtoupper($_until);
         
         $i = 0;
         
-        while($this->data[$i] != $target){
-            array_append($this->responseData, $this->data[$i]);
+        if(in_array($until, $_data, true)){
+            while($_data[$i] != $until){
+                array_push($responseData, $_data[$i]);
+                $i++;
+            }
+        } else {
+            $responseData = $_data; 
         }
-        
-        $JSONView.streamOutput($responseData);
+        $response = $JSONView->buildResponse('until', $responseData);
+        $JSONView->streamOutput($response);
     }
     
 }
