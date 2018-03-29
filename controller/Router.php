@@ -25,6 +25,7 @@ class Router{
         // get Parameters
         
         //TODO: Figure out how to get the URI and separate the params from it
+        $requestedURI = $_SERVER[REQUEST_URI];
         
         switch($requestedURI){
             case '/flip':
@@ -35,6 +36,7 @@ class Router{
                 $this->untilController.manipulate();
             default:
                 //Serve empty or 404 page
+                //Bypassing JSONView by doing so?
         }
         
         // switch-case matching the requested page to the controller
