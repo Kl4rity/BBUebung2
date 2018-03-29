@@ -27,14 +27,19 @@ class Router{
         
         //TODO: Figure out how to get the URI and separate the params from it
         $requestedURI = $_SERVER[REQUEST_URI];
+        $until_parameter;
+        
+        if(isset($_GET['until'])){
+            $until_parameter = $_GET['until'];
+        }
         
         switch($requestedURI){
             case '/flip':
-                $this->flipController.handle();
+                $this->flipController.handle($this->data, $this->JSONView);
             case '/odd':
-                $this->oddController.handle();
+                $this->oddController.handle($this->data, $this->JSONView);
             case 'until':
-                $this->untilController.handle();
+                $this->untilController.handle($this->data, $until_parameter, $this->JSONView);
             default:
                 $this->defaultController.handle($this->JSONView);
         }
