@@ -1,8 +1,26 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+class UntilController{
+    
+    private $data;
+    private $responseData;
+    
+    public function construct_(){
+        $this->responseData = array();
+        $this->data = array();
+    }
+    
+    public function handle($_data, $_target, $JSONView){
+        $this->data = $_data;
+        
+        $i = 0;
+        
+        while($this->data[$i] != $target){
+            array_append($this->responseData, $this->data[$i]);
+        }
+        
+        $JSONView.streamOutput($responseData);
+    }
+    
+}
 
