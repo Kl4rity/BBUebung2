@@ -6,6 +6,7 @@ class Router{
     private $flipController;
     private $oddController;
     private $untilController;
+    private $defaultController;
     private $dataHandler;
     
     public function construct_(){
@@ -29,14 +30,13 @@ class Router{
         
         switch($requestedURI){
             case '/flip':
-                $this->flipController.manipulate();
+                $this->flipController.handle();
             case '/odd':
-                $this->oddController.manipulate();
+                $this->oddController.handle();
             case 'until':
-                $this->untilController.manipulate();
+                $this->untilController.handle();
             default:
-                //Serve empty or 404 page
-                //Bypassing JSONView by doing so?
+                $this->defaultController.handle($this->JSONView);
         }
         
         // switch-case matching the requested page to the controller
@@ -49,6 +49,7 @@ class Router{
         $this->oddController = new OddController;
         $this->untilController = new UntilController;
         $this->dataHandler = new ArbitraryArray();
+        $this->defaultController = new DefaultController();
     }
 }
 
