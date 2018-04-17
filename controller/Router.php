@@ -48,26 +48,7 @@ class Router{
             $this->untilController->handle($this->data, $until_parameter, $this->JSONView);
         } else {
             $this->defaultController->handle($this->JSONView);
-
         }
-        
-        /*
-        switch($simulation_parameter){
-            case 'flip':
-                $this->flipController->handle($this->data, $this->JSONView);
-                break;
-            case 'odd':
-                $this->oddController->handle($this->data, $this->JSONView);
-                break;
-            case 'until':
-                $this->untilController->handle($this->data, $until_parameter, $this->JSONView);
-                break;
-            default:
-                $this->defaultController->handle($this->JSONView);
-        }
-        
-         * 
-         */ 
     }
 }
 
